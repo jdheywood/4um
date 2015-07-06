@@ -1,0 +1,45 @@
+Forum.Api-Contract
+
+
+Operations from previous Web App controller
+-------------------------------------------
+
+GET /getSearchTerms
+
+GET /areas -- rename topics, put in mongo? or config?
+
+GET /GetRecentAnswers
+
+GET /Search 
+
+POST /AskQuestion
+
+POST /CreateBookmark
+
+GET /GetMyQuestions
+
+GET /GetMyBookmarks
+
+POST /GetQuestionsForAdmin
+
+POST /GetQuestionCountForAdmin
+
+POST /AnswerQuestion
+
+POST /ReferQuestion
+
+POST /RemoveQuestion
+
+POST /EditQuestion
+
+POST /EditAnswer
+
+POST /ArchiveQuestion
+
+
+Map to RESTful API Resources & Verbs if possible
+------------------------------------------------
+
+
+
+
