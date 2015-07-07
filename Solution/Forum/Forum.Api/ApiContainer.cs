@@ -2,13 +2,11 @@
 using Forum.Core.Contracts;
 using Forum.Core.Factories;
 using Forum.Core.Http;
-using Forum.Core.Mapping;
 using Forum.Domain.Configuration;
 using Forum.Domain.Contracts;
 using Forum.Domain.Entities;
 using Forum.Domain.Factories;
 using Forum.Domain.Repositories;
-using MongoDB.Driver;
 using SimpleInjector;
 
 namespace Forum.Api

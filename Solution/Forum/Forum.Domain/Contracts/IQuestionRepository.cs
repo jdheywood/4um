@@ -33,7 +33,7 @@ namespace Forum.Domain.Contracts
 
         Task<long> GetRemovedCount();
 
-        void Add(Question question);
+        Task Add(Question question);
         
         void ReplaceById(Question question);
 

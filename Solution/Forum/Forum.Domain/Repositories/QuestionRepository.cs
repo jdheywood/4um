@@ -21,7 +21,7 @@ namespace Forum.Domain.Repositories
 
         public async Task<List<Question>> GetAll()
         {
-            return await collection.Find(new BsonDocument()).ToListAsync();
+            return await collection.Find(f => true).ToListAsync();
         }
 
         public async Task<List<Question>> GetByUserIdAsked(int id, bool hideRemoved)
@@ -170,7 +170,7 @@ namespace Forum.Domain.Repositories
             return await collection.CountAsync(filter);
         }
 
-        public async void Add(Question question)
+        public async Task Add(Question question)
         {
             await collection.InsertOneAsync(question);
         }
@@ -191,9 +191,14 @@ namespace Forum.Domain.Repositories
 
         public async void ClearCollection()
         {
-            var filter = Builders<Question>.Filter.Exists(answer => answer.Id);
+            var filter = Builders<Question>.Filter.Exists(question => question.Id);
 
             await collection.DeleteManyAsync(filter);
+        }
+
+        public static Task<List<Question>> ToListAsync(IFindFluent<Question, Question> findFluent)
+        {
+            return findFluent.ToListAsync();
         }
 
         #region Privates
