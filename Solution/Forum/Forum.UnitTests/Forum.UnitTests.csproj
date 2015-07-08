@@ -54,6 +54,9 @@
     <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\packages\AutoFixture.3.30.8\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
+    <Reference Include="Should">
+      <HintPath>..\packages\Should.1.1.20\lib\Should.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\MongoConfigurationFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\QuestionRepositoryTests.cs" />
   </ItemGroup>
@@ -71,6 +75,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Forum.Core\Forum.Core.csproj">
+      <Project>{48A74254-B3FF-41FF-806B-48D5D5225631}</Project>
+      <Name>Forum.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forum.Domain\Forum.Domain.csproj">
       <Project>{B9A7ECD9-B4FC-4AB7-B58E-27D5DF8B8561}</Project>
       <Name>Forum.Domain</Name>
