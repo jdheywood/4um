@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Forum.Domain.Entities;
-using MongoDB.Driver;
 
 namespace Forum.Domain.Contracts
 {

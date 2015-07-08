@@ -31,7 +31,7 @@ namespace Forum.Domain.Repositories
 
             if (!hideRemoved)
             {
-                filter = Builders<Question>.Filter.Eq("UserId", id);
+                filter = Builders<Question>.Filter.Eq("UserIdAsked", id);
             }
             else
             {
@@ -84,7 +84,7 @@ namespace Forum.Domain.Repositories
             return await collection.Find(filter).FirstOrDefaultAsync();
         }
 
-        public async Task<List<Question>> Search(string searchTerm, bool answeredOnly, bool hideRemoved)
+        public async Task<List<Question>> Search(string searchTerm, bool answeredOnly = false, bool hideRemoved = true)
         {
             var filterBuilder = Builders<Question>.Filter;
             var filter = filterBuilder.Text(searchTerm);

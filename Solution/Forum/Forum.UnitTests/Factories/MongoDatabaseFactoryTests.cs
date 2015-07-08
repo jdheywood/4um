@@ -1,5 +1,4 @@
-﻿using System;
-using Forum.Domain.Contracts;
+﻿using Forum.Domain.Contracts;
 using Forum.Domain.Factories;
 using MongoDB.Driver;
 using NSubstitute;
@@ -35,13 +34,13 @@ namespace Forum.UnitTests.Factories
 
             client.GetDatabase(configuration.DatabaseName).Returns(database);
 
-            databaseFactory = new MongoDatabaseFactory(configuration);
+            databaseFactory = new MongoDatabaseFactory();
         }
 
         [Test]
         public void GetDatabase_WhenCalledShouldReturnDatabaseFromClient()
         {
-            var database = databaseFactory.GetDatabase(client);
+            var database = databaseFactory.GetDatabase(configuration, client);
 
             // Proxy object returned, but it implements the interface of the actual object type, is that good enough for our test though?
             database.ShouldImplement<IMongoDatabase>(); 
