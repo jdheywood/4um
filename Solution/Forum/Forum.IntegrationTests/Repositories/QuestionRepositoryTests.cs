@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Forum.Core.Extensions;
 using Forum.Domain.Contracts;
 using Forum.Domain.Entities;
 using Forum.IntegrationTests.Helpers;
@@ -61,6 +63,26 @@ namespace Forum.IntegrationTests.Repositories
                         break;
                 }
                 localQuestion.Text = text;
+
+                if (identifier == 3 || identifier == 4)
+                {
+                    var questionAnswer = new QuestionAnswer()
+                    {
+                        CleanText = "the answer is...",
+                        DateTime = DateTime.Now.ToString("d"),
+                        IsBookmarked = true,
+                        Public = true,
+                        Id = identifier.ToString(CultureInfo.InvariantCulture),
+                        Removed = false,
+                        Text = "the answer is..."
+                    };
+
+                    localQuestion.Answers = new QuestionAnswer[] {questionAnswer};
+                }
+                else
+                {
+                    localQuestion.Answers = new QuestionAnswer[] {};
+                }
 
                 identifier++;
                 
@@ -175,14 +197,49 @@ namespace Forum.IntegrationTests.Repositories
             actual.Result.Count.ShouldEqual(expectedCount);
         }
 
+        [Test]
         public void Search_SearchingForAnsweredQuestionsReturnsOnlyAnsweredQuestions()
-        { }
+        {
+            const string term = "question";
+            const int expectedCount = 2;
+            const int expectedQuestionAnswersCount = 1;
+            const string expectedAnswerText = "the answer is...";
 
+            var actual = repository.Search(term, true, false);
+
+            actual.Result.Count.ShouldEqual(expectedCount);
+            
+            var firstOrDefault = actual.Result.FirstOrDefault();
+
+            if (firstOrDefault != null)
+            {
+                var answers = firstOrDefault.Answers;
+                answers.Length.ShouldEqual(expectedQuestionAnswersCount);
+                answers[0].CleanText.ShouldEqual(expectedAnswerText);
+            }
+        }
+
+        [Test]
         public void Search_SearchingForNonRemovedQuestionsReturnsOnlyNonRemovedQuestions()
-        { }
+        {
+            const string term = "question";
+            const int expectedCount = 4;
 
+            var actual = repository.Search(term, false, true);
+
+            actual.Result.Count.ShouldEqual(expectedCount);
+        }
+
+        [Test]
         public void Search_SearchingForAnsweredAndNonRemovedQuestionsReturnsOnlyAnsweredAndNonRemovedQuestions()
-        { }
+        {
+            const string term = "question";
+            const int expectedCount = 1;
+
+            var actual = repository.Search(term, true, true);
+
+            actual.Result.Count.ShouldEqual(expectedCount);
+        }
 
         public void GetNew_ReturnsNewQuestionsOnly()
         { }
