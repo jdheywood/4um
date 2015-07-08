@@ -4,6 +4,6 @@ namespace Forum.Domain.Contracts
 {
     public interface IMongoDatabaseFactory
     {
-        IMongoDatabase GetDatabase();
+        IMongoDatabase GetDatabase(IMongoConfiguration configuration, IMongoClient client);
     }
 }

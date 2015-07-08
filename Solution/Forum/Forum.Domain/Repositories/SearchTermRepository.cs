@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Forum.Domain.Context;
 using Forum.Domain.Contracts;
 using Forum.Domain.Entities;
 using MongoDB.Driver;
@@ -10,11 +11,9 @@ namespace Forum.Domain.Repositories
     {
         private readonly MongoCollectionBase<SearchTerm> collection; 
 
-        public SearchTermRepository(IMongoConfigurationFactory configurationFactory, IMongoCollectionFactory<SearchTerm> collectionFactory)
+        public SearchTermRepository(IMongoContext context)
         {
-            var configuration = configurationFactory.Create();
-
-            collection = collectionFactory.GetCollection(configuration.SearchTermCollectionName);
+            collection = context.GetSearchTermCollection();
         }
 
         public async Task<List<SearchTerm>> GetAll()

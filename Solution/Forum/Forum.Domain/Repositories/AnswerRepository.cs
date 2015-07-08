@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Forum.Domain.Context;
 using Forum.Domain.Contracts;
 using Forum.Domain.Entities;
 using MongoDB.Bson;
@@ -11,11 +12,9 @@ namespace Forum.Domain.Repositories
     {
         private readonly MongoCollectionBase<Answer> collection; 
 
-        public AnswerRepository(IMongoConfigurationFactory configurationFactory, IMongoCollectionFactory<Answer> collectionFactory)
+        public AnswerRepository(IMongoContext context)
         {
-            var configuration = configurationFactory.Create();
-
-            collection = collectionFactory.GetCollection(configuration.AnswerCollectionName);
+            collection = context.GetAnswerCollection();
         }
 
         public async Task<List<Answer>> GetAll()

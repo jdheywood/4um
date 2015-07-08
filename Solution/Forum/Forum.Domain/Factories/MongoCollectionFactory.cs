@@ -5,18 +5,12 @@ namespace Forum.Domain.Factories
 {
     public class MongoCollectionFactory<T> : IMongoCollectionFactory<T>
     {
-        private readonly IMongoDatabaseFactory databaseFactory;
+        public MongoCollectionFactory()
+        { }
 
-        public MongoCollectionFactory(IMongoDatabaseFactory databaseFactory)
+        public MongoCollectionBase<T> GetCollection(IMongoDatabase database, string collectionName)
         {
-            this.databaseFactory = databaseFactory;
-        }
-
-        public MongoCollectionBase<T> GetCollection(string collectionName)
-        {
-            var db = databaseFactory.GetDatabase();
-
-            return (MongoCollectionBase<T>)db.GetCollection<T>(collectionName);
+            return (MongoCollectionBase<T>)database.GetCollection<T>(collectionName);
         }
     }
 }

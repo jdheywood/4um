@@ -54,8 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\MongoContext.cs" />
+    <Compile Include="Contracts\IMongoClientFactory.cs" />
     <Compile Include="Contracts\IQuestionRepository.cs" />
     <Compile Include="Contracts\ISearchTermRepository.cs" />
+    <Compile Include="Factories\MongoClientFactory.cs" />
     <Compile Include="Factories\MongoDatabaseFactory.cs" />
     <Compile Include="Factories\MongoCollectionFactory.cs" />
     <Compile Include="Contracts\IMongoCollectionFactory.cs" />
@@ -84,9 +87,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Clients\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Forum.Core\Forum.Core.csproj">
       <Project>{48A74254-B3FF-41FF-806B-48D5D5225631}</Project>
