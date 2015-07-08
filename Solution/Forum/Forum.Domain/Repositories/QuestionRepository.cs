@@ -97,7 +97,7 @@ namespace Forum.Domain.Repositories
             }
             if (!answeredOnly && hideRemoved)
             {
-                return searchResults.Where(question => question.Removed).ToList();
+                return searchResults.Where(question => !question.Removed).ToList();
             }
 
             return !answeredOnly 

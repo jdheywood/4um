@@ -1,4 +1,5 @@
-﻿using Forum.Domain.Contracts;
+﻿using System.Threading.Tasks;
+using Forum.Domain.Contracts;
 using Forum.Domain.Entities;
 using MongoDB.Driver;
 
@@ -33,6 +34,8 @@ namespace Forum.Domain.Context
             configuration = configurationFactory.Create();
             var client = clientFactory.Create(configuration);
             database = databaseFactory.GetDatabase(configuration, client);
+
+            EnforceTextIndexes();
         }
 
         public MongoCollectionBase<Question> GetQuestionCollection()
@@ -49,14 +52,16 @@ namespace Forum.Domain.Context
         {
             return searchTermCollectionFactory.GetCollection(database, configuration.SearchTermCollectionName);
         }
-    }
 
-    public interface IMongoContext
-    {
-        MongoCollectionBase<Question> GetQuestionCollection();
+        public void EnforceTextIndexes()
+        {
+            // TODO Make this smarter so that if index exists it doesn't re-create (poss refresh only?)
+            // TODO Drive from configuration
 
-        MongoCollectionBase<Answer> GetAnswerCollection();
-        
-        MongoCollectionBase<SearchTerm> GetSearchTermCollection();
+            var collection = GetQuestionCollection();
+
+            collection.Indexes.CreateOneAsync(Builders<Question>.IndexKeys.Text("Text"));
+        }
+
     }
 }

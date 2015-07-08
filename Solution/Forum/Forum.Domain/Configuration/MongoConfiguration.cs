@@ -18,5 +18,7 @@ namespace Forum.Domain.Configuration
         public string QuestionCollectionName { get; set; }
         
         public string SearchTermCollectionName { get; set; }
+
+        public string TextIndexes { get; set; }
     }
 }

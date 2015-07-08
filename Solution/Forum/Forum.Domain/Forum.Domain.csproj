@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Context\MongoContext.cs" />
     <Compile Include="Contracts\IMongoClientFactory.cs" />
+    <Compile Include="Contracts\IMongoContext.cs" />
     <Compile Include="Contracts\IQuestionRepository.cs" />
     <Compile Include="Contracts\ISearchTermRepository.cs" />
     <Compile Include="Factories\MongoClientFactory.cs" />

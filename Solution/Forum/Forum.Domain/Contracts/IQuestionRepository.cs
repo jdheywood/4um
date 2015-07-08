@@ -18,7 +18,7 @@ namespace Forum.Domain.Contracts
 
         Task<Question> GetByText(string text);
 
-        Task<List<Question>> Search(string searchTerm, bool answeredOnly, bool hideRemoved);
+        Task<List<Question>> Search(string searchTerm, bool answeredOnly = false, bool hideRemoved = true);
 
         Task<List<Question>> GetNew(int pageNumber, int pageSize);
 

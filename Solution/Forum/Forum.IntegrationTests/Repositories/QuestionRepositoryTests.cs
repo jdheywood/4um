@@ -35,9 +35,32 @@ namespace Forum.IntegrationTests.Repositories
             foreach (var question in questions)
             {
                 var localQuestion = question;
+
                 localQuestion.Id = identifier.ToString(CultureInfo.InvariantCulture);
                 localQuestion.UserIdAsked = identifier + 10;
                 localQuestion.UserIdAnswered = identifier < 3 ? 100 : 200;
+                localQuestion.Removed = identifier == 3;
+
+                var text = string.Empty;
+                switch (identifier)
+                {
+                    case 1:
+                        text = "question one...";
+                        break;
+                    case 2:
+                        text = "question two...";
+                        break;
+                    case 3:
+                        text = "question three...";
+                        break;
+                    case 4:
+                        text = "question four...";
+                        break;
+                    case 5:
+                        text = "question five...";
+                        break;
+                }
+                localQuestion.Text = text;
 
                 identifier++;
                 
@@ -92,24 +115,65 @@ namespace Forum.IntegrationTests.Repositories
 
             actual.Count.ShouldEqual(expectedQuestionCount);
 
-            var countByExpectedIds = actual.Select(x => expectedQuestionIds.Contains(x.Id)).Count();
+            var countByExpectedIds = actual.Select(x => expectedQuestionIds.Contains(x.Id) && x.UserIdAnswered == userIdAnswered).Count();
             countByExpectedIds.ShouldEqual(expectedQuestionCount);
         }
 
+        [Test]
         public void GetByIdArray_ReturnsQuestionsByArrayOfIdentifiers()
-        { }
+        {
+            string[] questionIds = { "3", "4", "5" };
+            const int expectedQuestionCount = 2;
 
+            var actual = repository.GetByIdArray(questionIds, true).Result;
+
+            actual.Count.ShouldEqual(expectedQuestionCount);
+            var countByExpectedIds = actual.Select(x => questionIds.Contains(x.Id) && !x.Removed).Count();
+            countByExpectedIds.ShouldEqual(expectedQuestionCount);            
+        }
+
+        [Test]
         public void GetById_WhenCalledWithExistingIdReturnsQuestion()
-        { }
+        {
+            const string questionId = "5";
+            const string expectedText = "question five...";
 
+            var actual = repository.GetById(questionId);
+
+            actual.Result.Text.ShouldEqual(expectedText);
+        }
+
+        [Test]
         public void GetById_WhenCalledWithNonExistingIdDoesNotReturnQuestion()
-        { }
+        {
+            const string questionId = "6";
 
+            var actual = repository.GetById(questionId);
+
+            actual.Result.ShouldBeNull();
+        }
+
+        [Test]
         public void GetByText_WhenTextMatchedReturnsQuestion()
-        { }
+        {
+            const string text = "question three...";
+            const string expectedId = "3";
 
+            var actual = repository.GetByText(text);
+
+            actual.Result.Id.ShouldEqual(expectedId);
+        }
+
+        [Test]
         public void Search_SearchingForValidTermReturnsResults()
-        { }
+        {
+            const string term = "question";
+            const int expectedCount = 4;
+
+            var actual = repository.Search(term);
+
+            actual.Result.Count.ShouldEqual(expectedCount);
+        }
 
         public void Search_SearchingForAnsweredQuestionsReturnsOnlyAnsweredQuestions()
         { }
