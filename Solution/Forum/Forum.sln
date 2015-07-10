@@ -39,6 +39,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.UnitTests", "Forum.Un
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.IntegrationTests", "Forum.IntegrationTests\Forum.IntegrationTests.csproj", "{2145F764-9345-4726-8635-AED18C17F3CB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{BB69E0B3-6ABF-4BD3-801F-BC6A2D8EC3E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Tools.Samples", "Forum.Tools.Samples\Forum.Tools.Samples.csproj", "{1FA1992B-8E90-477D-8576-5DA2D9C6A7A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,10 @@ Global
 		{2145F764-9345-4726-8635-AED18C17F3CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2145F764-9345-4726-8635-AED18C17F3CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2145F764-9345-4726-8635-AED18C17F3CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FA1992B-8E90-477D-8576-5DA2D9C6A7A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FA1992B-8E90-477D-8576-5DA2D9C6A7A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FA1992B-8E90-477D-8576-5DA2D9C6A7A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FA1992B-8E90-477D-8576-5DA2D9C6A7A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,5 +84,6 @@ Global
 		{B9A7ECD9-B4FC-4AB7-B58E-27D5DF8B8561} = {FDA913E0-688A-4ED8-97CB-AF44F1666A88}
 		{3273D68F-1E0A-4A8D-AC8B-0391C446832F} = {12077B69-0228-4455-AF4E-220EB637F019}
 		{2145F764-9345-4726-8635-AED18C17F3CB} = {12077B69-0228-4455-AF4E-220EB637F019}
+		{1FA1992B-8E90-477D-8576-5DA2D9C6A7A1} = {BB69E0B3-6ABF-4BD3-801F-BC6A2D8EC3E8}
 	EndGlobalSection
 EndGlobal

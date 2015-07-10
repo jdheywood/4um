@@ -19,14 +19,14 @@ namespace Forum.Domain.Contracts
         
         Task<Answer> GetByQuestionId(string questionId);
         
-        void Add(Answer answer);
+        Task Add(Answer answer);
         
         Task<UpdateResult> Update(Answer answer);
         
-        void ReplaceById(Answer answer);
+        Task ReplaceById(Answer answer);
         
-        void RemoveById(string id);
+        Task RemoveById(string id);
         
-        void ClearCollection();
+        Task ClearCollection();
     }
 }

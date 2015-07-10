@@ -2,7 +2,9 @@
 using Forum.Core.Contracts;
 using Forum.Core.Factories;
 using Forum.Core.Http;
+using Forum.Core.Mapping;
 using Forum.Domain.Configuration;
+using Forum.Domain.Context;
 using Forum.Domain.Contracts;
 using Forum.Domain.Entities;
 using Forum.Domain.Factories;
@@ -15,7 +17,8 @@ namespace Forum.Api
     {
         public static Container RegisterDependencies(Container container)
         {
-            // Register your types, for instance using the RegisterWebApiRequest extension from the integration package:
+            container.RegisterWebApiRequest<IMongoContext, MongoContext>();
+            container.RegisterWebApiRequest<IMongoClientFactory, MongoClientFactory>();
             container.RegisterWebApiRequest<IMongoConfiguration, MongoConfiguration>();
             container.RegisterWebApiRequest<IMongoConfigurationFactory, MongoConfigurationFactory>();
             container.RegisterWebApiRequest<IMongoDatabaseFactory, MongoDatabaseFactory>();
@@ -27,7 +30,7 @@ namespace Forum.Api
             container.RegisterWebApiRequest<ISearchTermRepository, SearchTermRepository>();
             container.RegisterWebApiRequest<IHttpClient, HttpClient>();
             container.RegisterWebApiRequest<IConfigurationRepository, ConfigurationRepository>();
-            container.RegisterWebApiRequest<IMapper, Core.Mapping.Mapper>();
+            container.RegisterWebApiRequest<IMapper, Mapper>();
             container.RegisterWebApiRequest<IHttpActionResultFactory, HttpActionResultFactory>();
 
             // TODO find a better way to register the above

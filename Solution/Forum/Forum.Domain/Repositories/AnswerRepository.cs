@@ -19,9 +19,7 @@ namespace Forum.Domain.Repositories
 
         public async Task<List<Answer>> GetAll()
         {
-            var filter = Builders<Answer>.Filter.Exists(answer => answer.Id);
-
-            return await collection.Find(filter).ToListAsync();
+            return await collection.Find(f => true).ToListAsync();
         }
 
         public async Task<List<Answer>> GetByUserId(int id)
@@ -64,7 +62,7 @@ namespace Forum.Domain.Repositories
             return await collection.Find(filter).FirstOrDefaultAsync();
         }
 
-        public async void Add(Answer answer)
+        public async Task Add(Answer answer)
         {
             await collection.InsertOneAsync(answer);
         }
@@ -86,21 +84,21 @@ namespace Forum.Domain.Repositories
             return await collection.UpdateOneAsync(filter, update);
         }
 
-        public async void ReplaceById(Answer answer)
+        public async Task ReplaceById(Answer answer)
         {
             var filter = Builders<Answer>.Filter.Eq("_id", answer.Id);
             
             await collection.ReplaceOneAsync(filter, answer);
         }
 
-        public async void RemoveById(string id)
+        public async Task RemoveById(string id)
         {
             var filter = Builders<Answer>.Filter.Eq("_id", id);
 
             await collection.DeleteOneAsync(filter);
         }
 
-        public async void ClearCollection()
+        public async Task ClearCollection()
         {
             var filter = Builders<Answer>.Filter.Exists(answer => answer.Id);
 
