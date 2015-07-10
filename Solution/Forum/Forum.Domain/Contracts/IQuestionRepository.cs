@@ -34,10 +34,10 @@ namespace Forum.Domain.Contracts
 
         Task Add(Question question);
         
-        void ReplaceById(Question question);
+        Task ReplaceById(Question question);
 
-        void RemoveById(string id);
+        Task RemoveById(string id);
 
-        void ClearCollection();
+        Task ClearCollection();
     }
 }

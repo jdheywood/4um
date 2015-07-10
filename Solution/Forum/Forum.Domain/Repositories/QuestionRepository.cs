@@ -174,21 +174,21 @@ namespace Forum.Domain.Repositories
             await collection.InsertOneAsync(question);
         }
 
-        public async void ReplaceById(Question question)
+        public async Task ReplaceById(Question question)
         {
             var filter = Builders<Question>.Filter.Eq("_id", question.Id);
 
             await collection.ReplaceOneAsync(filter, question);
         }
 
-        public async void RemoveById(string id)
+        public async Task RemoveById(string id)
         {
             var filter = Builders<Question>.Filter.Eq("_id", id);
 
             await collection.DeleteOneAsync(filter);
         }
 
-        public async void ClearCollection()
+        public async Task ClearCollection()
         {
             var filter = Builders<Question>.Filter.Exists(question => question.Id);
 
