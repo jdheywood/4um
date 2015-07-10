@@ -15,7 +15,7 @@ namespace Forum.Domain.Helpers
         public static string ProperCase(string input)
         {
             if (input == null) return null;
-            return input.Substring(0, 1).ToUpper() + input.Remove(0, 1);
+            return input.Substring(0, 1).ToUpper() + input.Remove(0, 1).ToLower();
         }
 
         /// <summary>

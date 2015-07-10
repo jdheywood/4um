@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using Forum.Domain.Contracts;
 using Forum.Domain.Entities;
 using Forum.IntegrationTests.Helpers;
@@ -62,13 +61,10 @@ namespace Forum.IntegrationTests.Repositories
             const string expectedQuestionId = "1";
             const int userIdAsked = 11;
 
-            // Act
             var actual = await repository.GetByUserIdAsked(userIdAsked, false);
 
             actual.Count.ShouldEqual(expectedQuestionCount);
-            
             var firstOrDefault = actual.FirstOrDefault();
-            
             if (firstOrDefault != null) firstOrDefault.Id.ShouldEqual(expectedQuestionId);
         }
 
@@ -82,7 +78,6 @@ namespace Forum.IntegrationTests.Repositories
             var actual = await repository.GetByUserIdAnswered(userIdAnswered);
 
             actual.Count.ShouldEqual(expectedQuestionCount);
-
             var countByExpectedIds = actual.Select(x => expectedQuestionIds.Contains(x.Id) && x.UserIdAnswered == userIdAnswered).Count();
             countByExpectedIds.ShouldEqual(expectedQuestionCount);
         }
@@ -107,7 +102,6 @@ namespace Forum.IntegrationTests.Repositories
             const string expectedText = "question five...";
 
             var actual = await repository.GetById(questionId);
-
             actual.Text.ShouldEqual(expectedText);
         }
 
@@ -117,7 +111,6 @@ namespace Forum.IntegrationTests.Repositories
             const string questionId = "8";
 
             var actual = await repository.GetById(questionId);
-
             actual.ShouldBeNull();
         }
 
@@ -128,7 +121,6 @@ namespace Forum.IntegrationTests.Repositories
             const string expectedId = "3";
 
             var actual = await repository.GetByText(text);
-
             actual.Id.ShouldEqual(expectedId);
         }
 
@@ -139,7 +131,6 @@ namespace Forum.IntegrationTests.Repositories
             const int expectedCount = 6;
 
             var actual = await repository.Search(term);
-
             actual.Count.ShouldEqual(expectedCount);
         }
 
@@ -154,9 +145,7 @@ namespace Forum.IntegrationTests.Repositories
             var actual = await repository.Search(term, true, false);
 
             actual.Count.ShouldEqual(expectedCount);
-            
             var firstOrDefault = actual.FirstOrDefault();
-
             if (firstOrDefault != null)
             {
                 var answers = firstOrDefault.Answers;
@@ -171,8 +160,7 @@ namespace Forum.IntegrationTests.Repositories
             const string term = "question";
             const int expectedCount = 6;
 
-            var actual = await repository.Search(term, false, true);
-
+            var actual = await repository.Search(term);
             actual.Count.ShouldEqual(expectedCount);
         }
 
@@ -182,8 +170,7 @@ namespace Forum.IntegrationTests.Repositories
             const string term = "question";
             const int expectedCount = 1;
 
-            var actual = await repository.Search(term, true, true);
-
+            var actual = await repository.Search(term, true);
             actual.Count.ShouldEqual(expectedCount);
         }
 
@@ -206,7 +193,6 @@ namespace Forum.IntegrationTests.Repositories
             const long expectedCount = 2;
 
             var actual = await repository.GetNewCount();
-
             actual.ShouldEqual(expectedCount);
         }
 
@@ -268,41 +254,36 @@ namespace Forum.IntegrationTests.Repositories
 
             var questionFromRepo = await repository.GetById(newQuestionId);
 
+            if (questionFromRepo == null) return;
+
             questionFromRepo.ShouldNotBeNull();
             questionFromRepo.Id.ShouldEqual(newQuestionId);
 
             AsyncHelpers.RunSync(() => repository.RemoveById(newQuestionId));
         }
 
-        //[Test]
+        [Test]
         public async void ReplaceById_WhenCalledWithValidIdQuestionUpdatedAsExpected()
         {
-            //NCrunch runs parallel, so this test needs to be idempotent! 
-            //var questionFromRepo = await repository.GetById(replacementQuestionId);
+            const string replacementQuestionId = "1";
+            var questionFromRepo = await repository.GetById(replacementQuestionId);
+
+            if (questionFromRepo == null) return;
 
             var fixture = new Fixture();
             var question = fixture.Build<Question>().Create();
-            const string replacementQuestionId = "1";
             const string replacementQuestionText = "This is the replacement text...";
             question.Id = replacementQuestionId;
             question.Text = replacementQuestionText;
 
             await repository.ReplaceById(question);
 
-            var questionFromRepo = await repository.GetById(replacementQuestionId);
+            questionFromRepo = await repository.GetById(replacementQuestionId);
 
             questionFromRepo.ShouldNotBeNull();
             questionFromRepo.Text.ShouldEqual(replacementQuestionText);
-
-            AsyncHelpers.RunSync(() => repository.RemoveById(replacementQuestionId));
         }
-
-        public async void RemoveById_WhenCalledWithValidIdQuestionIsRemoved()
-        { }
         
-        public async void RemoveById_WhenCalledWithInvalidIdQuestionCountRemainsUnchanged()
-        { }
-
         [Test]
         public async void ClearCollection_WhenCalledCollectionIsEmptied()
         {
@@ -341,11 +322,11 @@ namespace Forum.IntegrationTests.Repositories
                         break;
                     case 3:
                         SetSampleQuestionAsNew(localQuestion);
-                        localQuestion.Answers = new QuestionAnswer[] { GetSampleQuestionAnswer(identifier) };
+                        localQuestion.Answers = new[] { GetSampleQuestionAnswer(identifier) };
                         break;
                     case 4:
                         SetSampleQuestionAsRemoved(localQuestion);
-                        localQuestion.Answers = new QuestionAnswer[] { GetSampleQuestionAnswer(identifier) };
+                        localQuestion.Answers = new[] { GetSampleQuestionAnswer(identifier) };
                         break;
                     case 5:
                         SetSampleQuestionAsReplied(localQuestion);
@@ -403,7 +384,7 @@ namespace Forum.IntegrationTests.Repositories
 
         private static QuestionAnswer GetSampleQuestionAnswer(int identifier)
         {
-            var questionAnswer = new QuestionAnswer()
+            var questionAnswer = new QuestionAnswer
             {
                 CleanText = "the answer is...",
                 DateTime = DateTime.Now.ToString("d"),
@@ -443,16 +424,6 @@ namespace Forum.IntegrationTests.Repositories
                     break;
             }
             return text;
-        }
-
-        private void CustomiseQuestion()
-        {
-            var fixture = new Fixture();
-
-            fixture.Customize<Question>(func => func
-                .With(question => question.Removed, false));
-            
-            var sut = fixture.Create<Question>();
         }
 
         #endregion
