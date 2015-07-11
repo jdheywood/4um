@@ -113,20 +113,102 @@ namespace Forum.IntegrationTests.Repositories
             actual.QuestionId.ShouldEqual(questionId);
         }
 
+        [Test]
         public async void GetByQuestionId_WhenMatchingAnswerInCollectionItIsReturned()
-        { }
+        {
+            const string questionId = "1";
 
+            var actual = await repository.GetByQuestionId(questionId);
+
+            actual.ShouldNotBeNull();
+            actual.QuestionId.ShouldEqual(questionId);
+        }
+
+        [Test]
         public async void Add_RemoveById_CanAddNewAnswerThenRemoveByIdentifier()
-        { }
+        {
+            var fixture = new Fixture();
+            var newAnswer = fixture.Create<Answer>();
+            
+            const string newId = "987";
+            newAnswer.Id = newId;
 
+            const string newText = "I'm a new answer";
+            newAnswer.Text = newText;
+
+            await repository.Add(newAnswer);
+
+            var actual = await repository.GetById(newId);
+            
+            actual.ShouldNotBeNull();
+            actual.Text.ShouldEqual(newText);
+
+            await repository.RemoveById(newId);
+
+            var reCheck = await repository.GetById(newId);
+            reCheck.ShouldBeNull();
+        }
+
+        [Test]
         public async void Update_CanUpdateExistingAnswerById()
-        { }
+        {
+            const string id = "4";
+            const string newText = "updated text";
+            const int newViews = 99999;
 
+            var before = await repository.GetById(id);
+
+            before.ShouldNotBeNull();
+
+            before.Text = newText;
+            before.Views = newViews;
+
+            var updateResult = await repository.Update(before);
+
+            updateResult.ShouldNotBeNull();
+            updateResult.ModifiedCount.ShouldEqual(1);
+
+            var after = await repository.GetById(id);
+
+            after.Text.ShouldEqual(newText);
+            after.Views.ShouldEqual(newViews);
+        }
+
+        [Test]
         public async void ReplaceById_CanReplaceExistingAnswer()
-        { }
+        {
+            const string idToReplace = "3";
 
+            var fixture = new Fixture();
+            var replacement = fixture.Create<Answer>();
+            replacement.Id = idToReplace;
+
+            var before = await repository.GetById(idToReplace);
+
+            before.ShouldNotBeNull();
+
+            await repository.ReplaceById(replacement);
+
+            var after = await repository.GetById(idToReplace);
+
+            after.ShouldNotBeNull();
+            after.Text.ShouldEqual(replacement.Text);
+            after.Views.ShouldEqual(replacement.Views);
+            after.DateTime.ShouldNotEqual(before.DateTime);
+            after.QuestionId.ShouldNotEqual(before.QuestionId);
+        }
+
+        [Test]
         public async void ClearCollection_WhenCalledCollectionIsEmptied()
-        { }
+        {
+            const int expectedAnswerCount = 0;
+
+            await repository.ClearCollection();
+
+            var actual = await repository.GetAll();
+
+            actual.Count.ShouldEqual(expectedAnswerCount);
+        }
 
 
         #region Privates
