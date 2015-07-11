@@ -79,14 +79,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Repositories\AnswerRepositoryTests.cs" />
     <Compile Include="Repositories\QuestionRepositoryTests.cs" />
     <Compile Include="TestContainer.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

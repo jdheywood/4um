@@ -68,11 +68,10 @@
     <Compile Include="Loaders\QuestionLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Removers\QuestionRemover.cs" />
     <Compile Include="SamplesContainer.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Removers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

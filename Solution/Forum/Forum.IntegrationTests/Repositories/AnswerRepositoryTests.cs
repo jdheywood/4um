@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Forum.Core.Helpers;
 using Forum.Domain.Contracts;
 using Forum.Domain.Entities;
-using Forum.IntegrationTests.Helpers;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 
@@ -91,7 +87,6 @@ namespace Forum.IntegrationTests.Repositories
             foreach (var answer in answers)
             {
                 var localAnswer = answer;
-
 
                 AsyncHelpers.RunSync(() => repository.Add(localAnswer));
             }

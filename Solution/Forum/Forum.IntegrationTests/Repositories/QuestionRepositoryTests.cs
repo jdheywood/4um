@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Forum.Core.Helpers;
 using Forum.Domain.Contracts;
 using Forum.Domain.Entities;
-using Forum.IntegrationTests.Helpers;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 using Should;

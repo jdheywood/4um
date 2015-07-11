@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Forum.IntegrationTests.Helpers
+namespace Forum.Core.Helpers
 {
-    public static class AsyncHelpers
+    public class AsyncHelpers
     {
         /// <summary>
         /// Execute's an async Task<T> method which has a void return value synchronously

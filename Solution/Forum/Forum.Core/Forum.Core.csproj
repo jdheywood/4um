@@ -120,6 +120,7 @@
     <Compile Include="Extensions\ErrorExtensions.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Factories\HttpActionResultFactory.cs" />
+    <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Mapping\AutoMapperConfiguration.cs" />
     <Compile Include="Mapping\Mapper.cs" />
     <Compile Include="Models\ErrorDto.cs" />
