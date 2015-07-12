@@ -10,12 +10,15 @@
 [https://www.mongodb.org/downloads](https://www.mongodb.org/downloads)
 * Install MongoDb, installing as a service is optional but saves you starting the service when you boot up 
 [Install MongoDb as Windows Service](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/#run-the-mongodb-service)
+* Download a mongodb client, [robomongo](http://robomongo.org/) is nice and free
+
 * Open Forum.sln in Visual Studio (2012 or above)
-* Set Forum.Api project as start up
+* Build the solution
+* Run Forum.Tools.Sample.exe to load some sample data to Mongo
+* Set Forum.Api project as start project
 * hit F5 to see API running
-* Set up the Api in IIS under the url localhost/forum-api (or whatever you want to configure it as)
-* Set Forum.Web project as start up
-* hit f5 to see the UI, this should interact with your local toast API, check your config if it's not playing nicely
+* OR set up the Api in IIS under the url localhost/forum-api (or whatever you want to configure it as)
+
 
 
 ### TODO: ###
@@ -31,4 +34,3 @@
 
 ### Who do I talk to? ###
 * Repo owner: jdheywood@gmail.com
-
