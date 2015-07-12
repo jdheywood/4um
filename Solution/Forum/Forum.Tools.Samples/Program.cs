@@ -42,6 +42,8 @@ namespace Forum.Tools.Samples
             }
             else
             {
+                // TODO make the load dependent on an empty database to prevent duplicate id exceptions
+
                 var questionLoader = new QuestionLoader(questionRepository);
                 questionLoader.SetUpQuestions();
 

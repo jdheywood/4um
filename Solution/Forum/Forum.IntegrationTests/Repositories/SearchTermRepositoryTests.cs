@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Forum.Core.Helpers;
 using Forum.Domain.Contracts;
 using Forum.Domain.Entities;
-using MongoDB.Driver;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 using Should;
@@ -23,11 +18,13 @@ namespace Forum.IntegrationTests.Repositories
         {
             var context = new Context();
             repository = context.Container.GetInstance<ISearchTermRepository>();
+
+            AsyncHelpers.RunSync(() => repository.ClearCollection());
         }
 
         [SetUp]
         public void SetUp()
-        {
+        {            
             var fixture = new Fixture();
             
             var searchTerms = new List<SearchTerm>();

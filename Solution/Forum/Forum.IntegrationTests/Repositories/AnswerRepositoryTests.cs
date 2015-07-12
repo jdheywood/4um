@@ -22,6 +22,8 @@ namespace Forum.IntegrationTests.Repositories
         {
             var context = new Context();
             repository = context.Container.GetInstance<IAnswerRepository>();
+
+            AsyncHelpers.RunSync(() => repository.ClearCollection());
         }
 
         [SetUp]
