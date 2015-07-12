@@ -78,7 +78,8 @@ namespace Forum.IntegrationTests.Repositories
             var actual = await repository.GetByUserIdAnswered(userIdAnswered);
 
             actual.Count.ShouldEqual(expectedQuestionCount);
-            var countByExpectedIds = actual.Select(x => expectedQuestionIds.Contains(x.Id) && x.UserIdAnswered == userIdAnswered).Count();
+            var countByExpectedIds =
+                actual.Select(x => expectedQuestionIds.Contains(x.Id) && x.UserIdAnswered == userIdAnswered).Count();
             countByExpectedIds.ShouldEqual(expectedQuestionCount);
         }
 

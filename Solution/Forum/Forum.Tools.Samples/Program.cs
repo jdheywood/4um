@@ -34,12 +34,16 @@ namespace Forum.Tools.Samples
                 var questionRemover = new QuestionRemover(questionRepository);
                 questionRemover.Remove();
 
+                // TODO implement answer remover
             }
+            else
+            {
+                var questionLoader = new QuestionLoader(questionRepository);
+                questionLoader.SetUpQuestions();
 
-            var questionLoader = new QuestionLoader(questionRepository);
-            questionLoader.SetUpQuestions();
-
-
+                var answerLoader = new AnswerLoader(answerRepository, questionRepository);
+                answerLoader.SetUpAnswers();
+            }
 
             Console.WriteLine("finished, press any key to close...");
             Console.ReadKey();

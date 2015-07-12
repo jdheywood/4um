@@ -20,7 +20,7 @@ namespace Forum.Tools.Samples.Loaders
             repository = questionReository;
         }
 
-        public async Task SetUpQuestions()
+        public void SetUpQuestions()
         {
             var fixture = new Fixture();
 
@@ -28,10 +28,10 @@ namespace Forum.Tools.Samples.Loaders
             fixture.RepeatCount = NumberOfQuestions;
             fixture.AddManyTo(questions);
 
-            await CustomiseAndAddSampleQuestions(questions);
+            CustomiseAndAddSampleQuestions(questions);
         }
 
-        private async Task CustomiseAndAddSampleQuestions(IEnumerable<Question> questions)
+        private void CustomiseAndAddSampleQuestions(IEnumerable<Question> questions)
         {
             var identifier = 1;
             foreach (var question in questions)
