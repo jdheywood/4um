@@ -1,12 +1,11 @@
-﻿using System.Threading.Tasks;
-using Forum.Core.Helpers;
+﻿using Forum.Core.Helpers;
 using Forum.Domain.Contracts;
 
 namespace Forum.Tools.Samples.Removers
 {
     public class QuestionRemover
     {
-        private IQuestionRepository repository;
+        private readonly IQuestionRepository repository;
 
         public QuestionRemover(IQuestionRepository questionRepository)
         {

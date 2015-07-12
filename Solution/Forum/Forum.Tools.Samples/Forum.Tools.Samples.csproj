@@ -65,10 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Loaders\SearchTermLoader.cs" />
     <Compile Include="Loaders\AnswerLoader.cs" />
     <Compile Include="Loaders\QuestionLoader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Removers\SearchTermRemover.cs" />
     <Compile Include="Removers\AnswerRemover.cs" />
     <Compile Include="Removers\QuestionRemover.cs" />
     <Compile Include="SamplesContainer.cs" />

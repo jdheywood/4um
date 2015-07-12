@@ -3,13 +3,13 @@ using Forum.Domain.Contracts;
 
 namespace Forum.Tools.Samples.Removers
 {
-    public class AnswerRemover
+    public class SearchTermRemover
     {
-        private readonly IAnswerRepository repository;
+        private readonly ISearchTermRepository repository;
 
-        public AnswerRemover(IAnswerRepository answerRepository)
+        public SearchTermRemover(ISearchTermRepository searchTermRepository)
         {
-            repository = answerRepository;
+            repository = searchTermRepository;
         }
 
         public void Remove()

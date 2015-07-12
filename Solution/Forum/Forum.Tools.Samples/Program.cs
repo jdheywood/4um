@@ -36,6 +36,9 @@ namespace Forum.Tools.Samples
 
                 var answerRemover = new AnswerRemover(answerRepository);
                 answerRemover.Remove();
+
+                var searchTermRemover = new SearchTermRemover(searchTermRepository);
+                searchTermRemover.Remove();
             }
             else
             {
@@ -44,6 +47,9 @@ namespace Forum.Tools.Samples
 
                 var answerLoader = new AnswerLoader(answerRepository, questionRepository);
                 answerLoader.SetUpAnswers();
+
+                var searchTermLoader = new SearchTermLoader(searchTermRepository);
+                searchTermLoader.SetUpSearchTerms();
             }
 
             Console.WriteLine("finished, press any key to close...");
