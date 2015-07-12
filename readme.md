@@ -10,13 +10,16 @@
 [https://www.mongodb.org/downloads](https://www.mongodb.org/downloads)
 * Install MongoDb, installing as a service is optional but saves you starting the service when you boot up 
 [Install MongoDb as Windows Service](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/#run-the-mongodb-service)
-* Open Forum.sln in Visual Studio (2012 or above)
-* Set Forum.Api project as start up
-* hit F5 to see API running
-* Set up the Api in IIS under the url localhost/forum-api (or whatever you want to configure it as)
-* Set Forum.Web project as start up
-* hit f5 to see the UI, this should interact with your local toast API, check your config if it's not playing nicely
+* Download a mongodb client, [robomongo](http://robomongo.org/) is nice and free
 
+* Open Forum.sln in Visual Studio (2012 or above)
+* Build the solution
+* Run Forum.Tools.Sample.exe to load some sample data to Mongo
+* Set Forum.Api project as start project
+* hit F5 to see API running
+* OR set up the Api in IIS under the url localhost/forum-api (or whatever you want to configure it as)
+* Running the integration tests will wipe your mongo database, so that it can set up a known set of test data. The integration tests also tear down this data, so after running you need to re-run the Forum.Tools.Sample executable if you want sample data in mongo.
+* Running the Forum.Tools.Sample executable with the optional first argument of 'remove' will also wipe the local mongo database should you wish to do this
 
 ### TODO: ###
 * Review js frameworks for integration with API
@@ -31,4 +34,3 @@
 
 ### Who do I talk to? ###
 * Repo owner: jdheywood@gmail.com
-
