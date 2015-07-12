@@ -19,6 +19,7 @@
 * hit F5 to see API running
 * OR set up the Api in IIS under the url localhost/forum-api (or whatever you want to configure it as)
 * Running the integration tests will wipe your mongo database, so that it can set up a known set of test data. The integration tests also tear down this data, so after running you need to re-run the Forum.Tools.Sample executable if you want sample data in mongo.
+* Running the Forum.Tools.Sample executable with the optional first argument of 'remove' will also wipe the local mongo database should you wish to do this
 
 ### TODO: ###
 * Review js frameworks for integration with API
