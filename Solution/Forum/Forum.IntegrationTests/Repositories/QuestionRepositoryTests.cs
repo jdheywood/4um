@@ -44,14 +44,11 @@ namespace Forum.IntegrationTests.Repositories
         [Test]
         public async void GetAll_WhenCalledReturnsAllQuestions()
         {
-            // Arrange
             const int expectedNumber = NumberOfQuestions;
 
-            // Act
             var actual = await repository.GetAll();
 
-            // Assert
-            Assert.AreEqual(expectedNumber, actual.Count);
+            actual.Count.ShouldEqual(expectedNumber);
         }
 
         [Test]

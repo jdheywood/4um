@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Forum.Domain.Context;
 using Forum.Domain.Contracts;
 using Forum.Domain.Entities;
 using MongoDB.Driver;
@@ -18,7 +17,7 @@ namespace Forum.Domain.Repositories
 
         public async Task<List<SearchTerm>> GetAll()
         {
-            var filter = Builders<SearchTerm>.Filter.SizeGt("Text", 0);
+            var filter = Builders<SearchTerm>.Filter.Ne("Text", string.Empty);
 
             var sort = GetSort();
 
@@ -39,7 +38,7 @@ namespace Forum.Domain.Repositories
             return await collection.Find(filter).FirstOrDefaultAsync();
         }
 
-        public async void Add(SearchTerm searchterm)
+        public async Task Add(SearchTerm searchterm)
         {
             await collection.InsertOneAsync(searchterm);
         }
@@ -53,21 +52,21 @@ namespace Forum.Domain.Repositories
             return await collection.UpdateOneAsync(filter, update);
         }
 
-        public async void ReplaceById(SearchTerm searchTerm)
+        public async Task ReplaceById(SearchTerm searchTerm)
         {
             var filter = Builders<SearchTerm>.Filter.Eq("_id", searchTerm.Id);
 
             await collection.ReplaceOneAsync(filter, searchTerm);
         }
 
-        public async void RemoveById(string id)
+        public async Task RemoveById(string id)
         {
             var filter = Builders<SearchTerm>.Filter.Eq("_id", id);
 
             await collection.DeleteOneAsync(filter);
         }
 
-        public async void ClearCollection()
+        public async Task ClearCollection()
         {
             var filter = Builders<SearchTerm>.Filter.Exists(term => term.Id);
 

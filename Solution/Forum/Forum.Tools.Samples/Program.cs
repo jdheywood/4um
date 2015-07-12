@@ -34,7 +34,8 @@ namespace Forum.Tools.Samples
                 var questionRemover = new QuestionRemover(questionRepository);
                 questionRemover.Remove();
 
-                // TODO implement answer remover
+                var answerRemover = new AnswerRemover(answerRepository);
+                answerRemover.Remove();
             }
             else
             {

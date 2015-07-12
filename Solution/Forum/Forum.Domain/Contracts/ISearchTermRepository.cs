@@ -13,14 +13,14 @@ namespace Forum.Domain.Contracts
 
         Task<SearchTerm> GetByText(string text);
 
-        void Add(SearchTerm bookmark);
+        Task Add(SearchTerm bookmark);
 
         Task<UpdateResult> Update(SearchTerm searchTerm); // update Views by Term/Text
 
-        void ReplaceById(SearchTerm searchTerm);
+        Task ReplaceById(SearchTerm searchTerm);
 
-        void RemoveById(string id);
+        Task RemoveById(string id);
 
-        void ClearCollection();
+        Task ClearCollection();
     }
 }

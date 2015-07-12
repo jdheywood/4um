@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Repositories\AnswerRepositoryTests.cs" />
     <Compile Include="Repositories\QuestionRepositoryTests.cs" />
+    <Compile Include="Repositories\SearchTermRepositoryTests.cs" />
     <Compile Include="TestContainer.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
