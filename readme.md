@@ -3,6 +3,7 @@
 * This is an example forum application, consisting of .NET API, MongoDb doc store and JavaScript framework UI
 * 0.1 work in progress
 * Based on an earlier project, some [details of the stack are described here](http://www.jdheywood.com/blog/2014/3/13/knockoutjs-net-mvc-mongodb) (this repo is a rewrite though so will differ as it is built out); 
+* [Accompanying blog post about this repository can be found here](http://www.jdheywood.com/blog/2015/7/20/mongodb-c-driver-2-a-niceish-abstraction)
 
 ## How do I get set up? ##
 
